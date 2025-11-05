@@ -5,11 +5,6 @@ from rich.table import Table
 # Ініціалізація бібліотеки colorama
 init(autoreset=True)
 
-# Вивід червоного тексту
-print(Fore.RED + "Цей текст червоний")
-# Вивід тексту з жовтим тлом
-print(Back.YELLOW + "Тло жовте")
-
 # Функція друку таблиці з заданими кольорами
 def print_table(color_left: str, color_center: str, color_right: str):
     # Створення консолі
