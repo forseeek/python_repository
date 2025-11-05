@@ -5,19 +5,19 @@ import time
 import random
 
 def text_to_speech(phrase: str, lang: str = "uk") -> str:
-    # Додаємо випадкове число до назви файлу для унікальності
+    # Add random number to the file name to make file unique
     filename = f"voice_{random.randint(1000, 9999)}.mp3"
 
-    # Створюємо об'єкт з текстом у gTTS
+    # Create object with text in gTTS
     tts = gTTS(phrase, lang=lang)
     tts.save(filename)
     
-    # Запуск мікшера, завантажуємо файл і програємо
+    # Start mixer, load file and play
     mixer.init()
     mixer.music.load(filename)
     mixer.music.play()
 
-    # кожні півсекунди перевірка чи зайнятий процес запису у файлі (аудіо програється)
+    # Every 0.5s check if audio is playing
     while mixer.music.get_busy():
         time.sleep(0.5)
 
@@ -26,10 +26,10 @@ def text_to_speech(phrase: str, lang: str = "uk") -> str:
 
 def delete_file(filename: str) -> bool:
     try:
-        # Прибирає музику з завантаження і виходить
+        # Unload audio and quit
         mixer.music.unload()
         mixer.quit()
-        # Видалення файлу
+        # Delete file
         os.remove(filename)
         return True
     except Exception as e:
